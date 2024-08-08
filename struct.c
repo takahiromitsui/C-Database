@@ -13,6 +13,12 @@ struct employee_t {
   bool ismanager;
 };
 
+union myuion_u{
+  int x;
+  char c;
+  short s;
+};
+
 int main () {
   struct employee_t employees[MAX_EMPLOYEES];
   int i = 0;
@@ -21,4 +27,10 @@ int main () {
     employees[i].ismanager = false;
   };
   printf("%f\n", employees[10].income);
+
+  union myuion_u u;
+  u.x = 0x41424344;
+  printf("%hx %hhx", u.s, u.x);
+  return 0;
+
 }
