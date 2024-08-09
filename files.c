@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
   if(argc !=2) {
@@ -12,5 +14,10 @@ int main(int argc, char *argv[]) {
   if (fd==-1) {
     perror("open");
     return -1;
-  }q\
+  }
+
+  char *mydata = "hello there file!\n";
+  write(fd, mydata, strlen(mydata));
+  close(fd);
+  return 0;
 }
