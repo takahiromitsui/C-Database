@@ -17,8 +17,8 @@ void output_file(int fd, struct dbheader_t *dbhdr) {
   };
   dbhdr -> magic =htonl(dbhdr->magic);
   dbhdr -> filesize = htonl(dbhdr->filesize);
-  dbhdr -> count = htonl(dbhdr-> count);
-  dbhdr -> version = htonl(dbhdr -> version);
+  dbhdr -> count = htons(dbhdr-> count);
+  dbhdr -> version = htons(dbhdr -> version);
   lseek(fd, 0, SEEK_SET);
   write(fd, dbhdr, sizeof(struct dbheader_t));
   return;
@@ -63,6 +63,7 @@ int validate_db_header(int fd, struct dbheader_t **headerOut) {
     free(header);
     return STATUS_ERROR;
   };
+  *headerOut = header;
 };
 
 int create_db_header(int fd, struct dbheader_t **headerOut) {
