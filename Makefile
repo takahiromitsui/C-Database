@@ -1,6 +1,6 @@
 TARGET = bin/dbview
 SRC = $(wildcard src/*.c)
-OBJ = $(patsubst src/%.c, obj/%.c, $(SRC))
+OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
 
 run: clean default
 					./$(TARGET)
