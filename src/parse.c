@@ -20,7 +20,7 @@ int validate_db_header(int fd, struct dbheader_t **headerOut) {
     printf("Malloc failed to create db header\n");
     return STATUS_ERROR;
   }
-  read(fd, header, sizeof(dbheader_t)) != sizeof(struct dbheader_t) {
+  if (read(fd, header, sizeof(struct dbheader_t)) != sizeof(struct dbheader_t)) {
     perror("read");
     free(header);
     return STATUS_ERROR;
@@ -62,7 +62,7 @@ int create_db_header(int fd, struct dbheader_t **headerOut) {
   header->version = 0x1;
   header->count = 0;
   header->magic = HEADER_MAGIC;
-  header->filesize = sizeof(struct db_header_t);
+  header->filesize = sizeof(struct dbheader_t);
   *headerOut = header;
   return STATUS_SUCCESS;
 }
